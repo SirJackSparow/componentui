@@ -3,6 +3,7 @@ package com.fendy.componentui
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -11,18 +12,24 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Brush
@@ -48,6 +55,62 @@ fun PrimaryButton(onClick: () -> Unit) {
     }
 
 }
+
+@Composable
+fun BoomButton(
+    text: String,
+    onClick: () -> Unit
+) {
+    var isClicked by remember { mutableStateOf(false) }
+
+    val scale by animateFloatAsState(
+        targetValue = if (isClicked) 1.2f else 1f,
+        animationSpec = tween(durationMillis = 200),
+        finishedListener = { isClicked = false } // Reset animation
+    )
+
+    Button(
+        onClick = {
+            isClicked = true
+            onClick()
+        },
+        modifier = Modifier
+            .scale(scale)
+            .padding(16.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)
+    ) {
+        Text(text = text, color = Color.White, fontWeight = FontWeight.Bold)
+    }
+}
+
+
+@Composable
+fun GoogleButton(
+    text: String,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.White, // Google-style white button
+            contentColor = Color.Black // Google-style text color
+        ),
+        shape = RoundedCornerShape(8.dp), // Google-like rounded corners
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(horizontal = 16.dp),
+        elevation = ButtonDefaults.elevatedButtonElevation(6.dp)
+    ) {
+        Text(
+            text = text,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp
+        )
+    }
+}
+
 
 @Composable
 fun NeonButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {

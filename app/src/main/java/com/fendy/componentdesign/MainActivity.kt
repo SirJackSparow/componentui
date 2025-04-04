@@ -10,8 +10,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.fendy.componentdesign.ui.theme.ComponentDesignTheme
+import com.fendy.componentui.BoomButton
+import com.fendy.componentui.ColorPicker
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +45,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     ComponentDesignTheme {
-        Greeting("Android")
+        ColorPicker(Color.Red, onColorSelected = {})
     }
 }
