@@ -20,13 +20,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+
 @Composable
 fun ColorPicker(
     selectedColor: Color,
     onColorSelected: (Color) -> Unit,
     colors: List<Color> = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta)
 ) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()

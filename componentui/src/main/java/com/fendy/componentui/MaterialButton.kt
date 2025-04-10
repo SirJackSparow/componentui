@@ -11,14 +11,20 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fendy.componentui.icons.GoogleIcon
 
 
 @Composable
@@ -84,30 +91,79 @@ fun BoomButton(
     }
 }
 
-
 @Composable
-fun GoogleButton(
+fun RegularButton(
     text: String,
+    modifier: Modifier = Modifier,
+    containerColor: Color = Color.White,
+    contentColor: Color = Color.Black,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White, // Google-style white button
-            contentColor = Color.Black // Google-style text color
+            containerColor = containerColor,
+            contentColor = contentColor
         ),
-        shape = RoundedCornerShape(8.dp), // Google-like rounded corners
-        modifier = Modifier
+        shape = RoundedCornerShape(8.dp),
+        modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
             .padding(horizontal = 16.dp),
-        elevation = ButtonDefaults.elevatedButtonElevation(6.dp)
+        elevation = ButtonDefaults.elevatedButtonElevation(6.dp),
+        contentPadding = PaddingValues(0.dp)
     ) {
         Text(
             text = text,
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
+            fontSize = 16.sp,
         )
+    }
+}
+
+
+@Composable
+fun GoogleButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    containerColor: Color = Color.White,
+    contentColor: Color = Color.Black,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+            contentColor = contentColor
+        ),
+        shape = RoundedCornerShape(8.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(horizontal = 16.dp),
+        elevation = ButtonDefaults.elevatedButtonElevation(6.dp),
+        contentPadding = PaddingValues(0.dp) // Important to get true alignment
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Icon on the left
+            Icon(
+                imageVector = GoogleIcon,
+                contentDescription = "Google Icon",
+                tint = Color.Unspecified,
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(start = 16.dp)
+                    .size(24.dp)
+            )
+
+            // Text centered
+            Text(
+                text = text,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
     }
 }
 
@@ -170,7 +226,7 @@ fun NeonButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit)
 @Preview(showSystemUi = true)
 @Composable
 fun PrimaryButtonPreview() {
-   PrimaryButton {
+    PrimaryButton {
 
-   }
+    }
 }
