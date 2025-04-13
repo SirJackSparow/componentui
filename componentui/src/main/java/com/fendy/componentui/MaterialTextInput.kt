@@ -29,6 +29,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ChatInputField(
     modifier: Modifier,
+    singleLine: Boolean = false,
+    maxLines: Int = Int.MAX_VALUE,
     message: String,
     onMessageChange: (String) -> Unit,
     onSendClick: () -> Unit
