@@ -72,7 +72,8 @@ fun ChatInputField(
                     }
                 }
             ),
-            singleLine = true
+            singleLine = singleLine,
+            maxLines = maxLines
         )
 
         IconButton(
