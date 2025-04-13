@@ -25,10 +25,11 @@ import androidx.compose.ui.unit.dp
 fun ColorPicker(
     selectedColor: Color,
     onColorSelected: (Color) -> Unit,
+    modifier: Modifier = Modifier,
     colors: List<Color> = listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta)
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.Center

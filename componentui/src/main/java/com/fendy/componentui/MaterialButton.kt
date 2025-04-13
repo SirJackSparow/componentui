@@ -48,8 +48,9 @@ import com.fendy.componentui.icons.GoogleIcon
 
 
 @Composable
-fun PrimaryButton(onClick: () -> Unit) {
+fun PrimaryButton(modifier: Modifier = Modifier,onClick: () -> Unit) {
     Button(
+        modifier = modifier,
         onClick = onClick, border = BorderStroke(
             width = 20.dp,
             brush = Brush.linearGradient(
@@ -66,6 +67,7 @@ fun PrimaryButton(onClick: () -> Unit) {
 @Composable
 fun BoomButton(
     text: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     var isClicked by remember { mutableStateOf(false) }
@@ -81,7 +83,7 @@ fun BoomButton(
             isClicked = true
             onClick()
         },
-        modifier = Modifier
+        modifier = modifier
             .scale(scale)
             .padding(16.dp),
         shape = RoundedCornerShape(12.dp),
@@ -226,7 +228,7 @@ fun NeonButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit)
 @Preview(showSystemUi = true)
 @Composable
 fun PrimaryButtonPreview() {
-    PrimaryButton {
+    PrimaryButton() {
 
     }
 }

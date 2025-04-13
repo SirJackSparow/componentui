@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ChatInputField(
+    modifier: Modifier,
     message: String,
     onMessageChange: (String) -> Unit,
     onSendClick: () -> Unit
@@ -35,7 +36,7 @@ fun ChatInputField(
     var text by remember { mutableStateOf(message) }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
             .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(24.dp))
@@ -65,7 +66,7 @@ fun ChatInputField(
                 onSend = {
                     if (text.isNotBlank()) {
                         onSendClick()
-                        text = "" // Clear input after sending
+                        text = ""
                     }
                 }
             ),
@@ -76,7 +77,7 @@ fun ChatInputField(
             onClick = {
                 if (text.isNotBlank()) {
                     onSendClick()
-                    text = "" // Clear input after sending
+                    text = ""
                 }
             }
         ) {
