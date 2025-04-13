@@ -33,6 +33,7 @@ fun ChatInputField(
     maxLines: Int = Int.MAX_VALUE,
     message: String,
     onMessageChange: (String) -> Unit,
+    enableButton: Boolean = true,
     onSendClick: () -> Unit
 ) {
     var text by remember { mutableStateOf(message) }
@@ -77,6 +78,7 @@ fun ChatInputField(
         )
 
         IconButton(
+            enabled = enableButton,
             onClick = {
                 if (text.isNotBlank()) {
                     onSendClick()
