@@ -99,7 +99,7 @@ fun ChatInputField(
             enabled = enableButton,
             onClick = {
                 if (text.isNotBlank()) {
-                    onSendClick()
+                    onMicClick()
                     text = ""
                 }
             }
