@@ -98,10 +98,8 @@ fun ChatInputField(
         IconButton(
             enabled = enableButton,
             onClick = {
-                if (text.isNotBlank()) {
-                    onMicClick()
-                    text = ""
-                }
+                text = ""
+                onMicClick()
             }
         ) {
             Icon(
