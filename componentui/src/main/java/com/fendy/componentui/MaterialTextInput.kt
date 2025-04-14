@@ -1,9 +1,11 @@
 package com.fendy.componentui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.fendy.componentui.icons.MicIcon
@@ -36,7 +39,8 @@ fun ChatInputField(
     onMessageChange: (String) -> Unit,
     enableButton: Boolean = true,
     onSendClick: () -> Unit,
-    onMicClick: () -> Unit
+    onMicTouchStart: () -> Unit,
+    onMicTouchEnd: () -> Unit
 ) {
     var text by remember { mutableStateOf(message) }
 
@@ -95,18 +99,22 @@ fun ChatInputField(
             )
         }
 
-        IconButton(
-            enabled = enableButton,
-            onClick = {
-                text = ""
-                onMicClick()
-            }
-        ) {
-            Icon(
-                imageVector = MicIcon,
-                contentDescription = "Mic",
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
+        Icon(
+            imageVector = MicIcon,
+            contentDescription = "Mic",
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .size(30.dp)
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onPress = {
+                            onMicTouchStart()
+                            tryAwaitRelease()
+                            onMicTouchEnd()
+                        }
+                    )
+                }
+        )
+
     }
 }

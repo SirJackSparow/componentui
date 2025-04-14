@@ -69,5 +69,5 @@ fun RegularButtonPreview() {
 @Preview(showBackground = true, name= "Chat")
 @Composable
 fun ChatInput() {
-    ChatInputField(modifier = Modifier, singleLine = true, message = "", onMessageChange = {}, onSendClick = { }, onMicClick = { })
+    ChatInputField(modifier = Modifier, singleLine = true, message = "", onMessageChange = {}, onSendClick = { }, onMicTouchEnd = { }, onMicTouchStart = {})
 }
