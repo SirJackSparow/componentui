@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.fendy.componentui.icons.MicIcon
 
 @Composable
 fun ChatInputField(
@@ -34,7 +35,8 @@ fun ChatInputField(
     message: String,
     onMessageChange: (String) -> Unit,
     enableButton: Boolean = true,
-    onSendClick: () -> Unit
+    onSendClick: () -> Unit,
+    onMicClick: () -> Unit
 ) {
     var text by remember { mutableStateOf(message) }
 
@@ -89,6 +91,22 @@ fun ChatInputField(
             Icon(
                 imageVector = Icons.Default.Send,
                 contentDescription = "Send",
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+
+        IconButton(
+            enabled = enableButton,
+            onClick = {
+                if (text.isNotBlank()) {
+                    onSendClick()
+                    text = ""
+                }
+            }
+        ) {
+            Icon(
+                imageVector = MicIcon,
+                contentDescription = "Mic",
                 tint = MaterialTheme.colorScheme.primary
             )
         }

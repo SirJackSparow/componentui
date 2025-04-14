@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.fendy.componentdesign.ui.theme.ComponentDesignTheme
+import com.fendy.componentui.ChatInputField
 import com.fendy.componentui.ColorPicker
 import com.fendy.componentui.GoogleButton
 import com.fendy.componentui.RegularButton
@@ -63,4 +64,10 @@ fun ColorPickerPreview() {
 @Composable
 fun RegularButtonPreview() {
     RegularButton("Without Sign In") { }
+}
+
+@Preview(showBackground = true, name= "Chat")
+@Composable
+fun ChatInput() {
+    ChatInputField(modifier = Modifier, singleLine = true, message = "", onMessageChange = {}, onSendClick = { }, onMicClick = { })
 }
