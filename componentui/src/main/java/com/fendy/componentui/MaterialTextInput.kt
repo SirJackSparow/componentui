@@ -118,3 +118,73 @@ fun ChatInputField(
 
     }
 }
+
+
+@Composable
+fun ChatInputFieldWithoutVoice(
+    modifier: Modifier,
+    singleLine: Boolean = false,
+    maxLines: Int = Int.MAX_VALUE,
+    message: String,
+    onMessageChange: (String) -> Unit,
+    enableButton: Boolean = true,
+    onSendClick: () -> Unit,
+) {
+    var text by remember { mutableStateOf(message) }
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(24.dp))
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextField(
+            value = text,
+            onValueChange = {
+                text = it
+                onMessageChange(it)
+            },
+            modifier = Modifier
+                .weight(1f)
+                .padding(end = 8.dp),
+            placeholder = { Text("Send a message...") },
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = Color.Transparent,
+                focusedContainerColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent
+            ),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Send
+            ),
+            keyboardActions = KeyboardActions(
+                onSend = {
+                    if (text.isNotBlank()) {
+                        onSendClick()
+                        text = ""
+                    }
+                }
+            ),
+            singleLine = singleLine,
+            maxLines = maxLines
+        )
+
+        IconButton(
+            enabled = enableButton,
+            onClick = {
+                if (text.isNotBlank()) {
+                    onSendClick()
+                    text = ""
+                }
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Send,
+                contentDescription = "Send",
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
