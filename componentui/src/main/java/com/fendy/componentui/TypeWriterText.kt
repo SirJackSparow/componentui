@@ -10,19 +10,30 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.delay
 
 @Composable
-fun TextWriterText(fullText: String, modifier: Modifier, typingSpeed: Long = 100) {
+fun TextWriterText(
+    fullText: String,
+    modifier: Modifier,
+    typingSpeed: Long = 100,
+    color: Color = Color.Black
+) {
     var displayText by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(fullText) {
         displayText = ""
         fullText.forEachIndexed { index, char ->
-            displayText = fullText.substring(0,index + 1)
+            displayText = fullText.substring(0, index + 1)
             delay(typingSpeed)
         }
     }
 
-    Text(text = displayText, style = MaterialTheme.typography.bodyMedium, modifier = modifier)
+    Text(
+        text = displayText,
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = modifier,
+        color = color
+    )
 }
