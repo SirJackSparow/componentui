@@ -1,11 +1,14 @@
 package com.fendy.componentui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -24,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.input.ImeAction
@@ -40,7 +44,8 @@ fun ChatInputField(
     enableButton: Boolean = true,
     onSendClick: () -> Unit,
     onMicTouchStart: () -> Unit,
-    onMicTouchEnd: () -> Unit
+    onMicTouchEnd: () -> Unit,
+    useVoice: Boolean = true
 ) {
     var text by remember { mutableStateOf(message) }
 
@@ -99,22 +104,44 @@ fun ChatInputField(
             )
         }
 
-        Icon(
-            imageVector = MicIcon,
-            contentDescription = "Mic",
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier
-                .size(30.dp)
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onPress = {
-                            onMicTouchStart()
-                            tryAwaitRelease()
-                            onMicTouchEnd()
-                        }
+        if (useVoice) {
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .border(
+                        width = 2.dp,
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color.Red, Color(0xFFFF9800), Color.Yellow, Color.Green, Color.Blue,
+                                Color(0xFF3F51B5), Color(0xFF8E24AA)
+                            )
+                        ),
+                        shape = CircleShape
                     )
-                }
-        )
+                    .background(
+                        color = Color.White,
+                        shape = CircleShape
+                    )
+                    .pointerInput(Unit) {
+                        detectTapGestures(
+                            onPress = {
+                                onMicTouchStart()
+                                tryAwaitRelease()
+                                onMicTouchEnd()
+                            }
+                        )
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = MicIcon,
+                    contentDescription = "Mic",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .size(30.dp)
+                )
+            }
+        }
 
     }
 }
