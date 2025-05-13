@@ -14,7 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.fendy.componentdesign.ui.theme.ComponentDesignTheme
+import com.fendy.componentui.ChatInputBar
 import com.fendy.componentui.ChatInputField
+import com.fendy.componentui.ChatInputFieldV2
 import com.fendy.componentui.ColorPicker
 import com.fendy.componentui.GoogleButton
 import com.fendy.componentui.RegularButton
@@ -70,4 +72,17 @@ fun RegularButtonPreview() {
 @Composable
 fun ChatInput() {
     ChatInputField(modifier = Modifier, singleLine = true, message = "", onMessageChange = {}, onSendClick = { }, onMicTouchEnd = { }, onMicTouchStart = {})
+}
+
+@Preview(showBackground = true, name= "Chat2")
+@Composable
+fun ChatInput2(){
+    ChatInputBar(onSend = {}, onMicClick = {})
+}
+
+@Preview(showBackground = true, name= "Chat3")
+@Composable
+fun ChatInput3(){
+    ChatInputFieldV2(modifier = Modifier, singleLine = true, placeHolder = "Type Something", message = "", onMessageChange = {}, onSendClick = { }, onMicTouchEnd = { }, onMicTouchStart = {})
+
 }
