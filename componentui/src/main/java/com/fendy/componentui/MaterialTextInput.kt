@@ -259,7 +259,6 @@ fun ChatInputFieldV2(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .imePadding()
             .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(24.dp))
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -273,7 +272,7 @@ fun ChatInputFieldV2(
             modifier = Modifier
                 .weight(1f)
                 .padding(end = 8.dp),
-            placeholder = { Text("Send a message...") },
+            placeholder = { Text(placeHolder) },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent,
@@ -342,7 +341,7 @@ fun ChatInputFieldV2(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = MicIcon,
+                    imageVector = VoiceBlinkIcon,
                     contentDescription = "Mic",
                     tint = Color(0xFF40414F),
                     modifier = Modifier
@@ -370,7 +369,6 @@ fun ChatInputFieldWithoutVoice(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
             .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(24.dp))
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -416,7 +414,7 @@ fun ChatInputFieldWithoutVoice(
             }
         ) {
             Icon(
-                imageVector = Icons.Default.Send,
+                imageVector = SendIcon,
                 contentDescription = "Send",
                 tint = MaterialTheme.colorScheme.primary
             )
